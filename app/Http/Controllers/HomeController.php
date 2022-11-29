@@ -23,6 +23,37 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard');
+    
+        return view('welcome');
+        
+    }
+
+
+    public function search(Request $request){
+        $search = $request->searchkey;
+
+       //$data = ['asd','www'];
+        session(['SearchData'=>[]]);
+       
+
+
+        return redirect()->route('home')->with('searchkey',$search);
+
+        
+
+       
+
+    }
+
+    public function googlesearch(Request $request){
+        session()->forget('SearchData');
+        session(['gsearch'=>true]);
+        return redirect()->route('home');
+
+    }
+
+    public function Back (Request $request){
+        session()->flush();
+        return redirect()->route('home');
     }
 }

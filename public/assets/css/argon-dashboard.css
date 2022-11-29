@@ -2640,7 +2640,7 @@ progress {
 .form-control:focus {
   color: #495057;
   background-color: #fff;
-  border-color: #fb6340;
+  border-color: #2dbe69;
   outline: 0;
   box-shadow: 0 3px 9px rgba(50, 50, 9, 0), 3px 4px 8px rgba(94, 114, 228, 0.1);
 }
@@ -2940,10 +2940,10 @@ textarea.form-control-lg {
   border-color: transparent;
 }
 .form-check-input:checked[type=checkbox] {
-  background-image: linear-gradient(310deg, #fb6340 0%, #f56036 100%);
+  background-image: linear-gradient(310deg, #47c9ad 0%, #2bc2b5 100%);
 }
 .form-check-input:checked[type=radio] {
-  background-image: linear-gradient(310deg, #fb6340 0%, #f56036 100%);
+  background-image: linear-gradient(310deg, #35ceb4 0%, rgb(44, 187, 192) 100%);
 }
 .form-check-input[type=checkbox]:indeterminate {
   background-color: #fb6340;
@@ -3460,19 +3460,20 @@ textarea.form-control-lg {
 
 .btn-primary {
   color: #000;
-  background-color: #fb6340;
+  background-color: #2ed192;
   border-color: #fb6340;
 }
 .btn-primary:hover {
   color: #000;
-  background-color: #fc7a5d;
-  border-color: #fb7353;
+  background-color:  #24a373;
+  ;
+  border-color: #1f9e30;
 }
 .btn-check:focus + .btn-primary, .btn-primary:focus {
   color: #000;
-  background-color: #fc7a5d;
+  background-color: #39c2a0;
   border-color: #fb7353;
-  box-shadow: 0 0 0 0.2rem rgba(213, 84, 54, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(41, 180, 134, 0.5);
 }
 .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
   color: #000;
@@ -19223,7 +19224,7 @@ textarea.form-control-lg {
 
 .btn-primary:hover,
 .btn.bg-gradient-primary:hover {
-  background-color: #fb6340;
+  background-color: #24a373;
   border-color: #fb6340;
 }
 .btn-primary .btn.bg-outline-primary,
