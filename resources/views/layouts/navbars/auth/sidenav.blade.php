@@ -7,6 +7,10 @@
             target="_blank">
             <!-- <img src="http://clipart-library.com/images/6ip5XkpXT.png" class="navbar-brand-img h-100" alt="main_logo"> -->
             <span class="ms-1 font-weight-bold">Early Disease Detection</span>
+            <br>
+            <span style="font-size:11px">CMS SYSTEM</span>
+            <br>
+            {{-- {{request()->url()}} --}}
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -36,6 +40,35 @@
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'Species') == true ? 'active' : '' }}" href="{{ route('species') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-layer-group text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Species </span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'Diseases') == true ? 'active' : '' }}" href="{{ route('disease') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-virus text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Diseases</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'Consultation') == true ? 'active' : '' }}" href="{{ route('consultation') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sms text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Consultation</span>
+                </a>
+            </li>
+
+
             <li class="nav-item">
                 <a class="nav-link {{ str_contains(request()->url(), 'user-management') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'user-management']) }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

@@ -4,8 +4,8 @@
             <div class="col-lg-6 mb-lg-0 mb-4">
                 <div class="copyright text-center text-sm text-muted text-lg-start">
                   
-                    <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">E-Disease Detection</a>
-                   
+                    <a href="#" class="font-weight-bold" >E-Disease Detection</a>
+                    
                 </div>
             </div>
             

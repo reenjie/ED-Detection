@@ -23,7 +23,13 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
-use App\Http\Controllers\ChangePassword;            
+use App\Http\Controllers\ChangePassword;    
+use App\Http\Controllers\SpeciesController;   
+use App\Http\Controllers\DiseaseController;
+use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\SymptomsController;
+
+        
   
 
 
@@ -41,6 +47,30 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::get('/googlesearch', [HomeController::class, 'googlesearch'])->name('googlesearch')->middleware('guest');
 	Route::get('/Back', [HomeController::class, 'Back'])->name('Back')->middleware('guest');
 
+
+	//species
+	Route::get('Species',[SpeciesController::class,'index'])->name('species');
+	Route::post('Species',[SpeciesController::class,'store'])->name('addspecies');
+	Route::post('Species/Edit',[SpeciesController::class,'edit'])->name('editspecies');
+
+	Route::get('Species/Delete',[SpeciesController::class,'destroy'])->name('deletespecies');
+
+
+	//Disease
+
+	Route::get('Diseases',[DiseaseController::class,'index'])->name('disease');
+	Route::get('Diseases/Manage',[DiseaseController::class,'sort'])->name('sortdisease');
+	Route::get('reset',[DiseaseController::class,'resetSort'])->name('resetSelection');
+
+	Route::post('AddDisease',[DiseaseController::class,'store'])->name('adddisease');
+	Route::post('Addsymptoms',[SymptomsController::class,'store'])->name('addsymptom');
+
+	Route::get('deletedisease',[DiseaseController::class,'destroy'])->name('deletedisease');
+	
+
+
+	//Consultation
+	Route::get('Consultation',[ConsultationController::class,'index'])->name('consultation');
 	
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
@@ -52,4 +82,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+	
+
+
+
+
+
+
+
+
 });

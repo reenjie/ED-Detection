@@ -27,6 +27,7 @@ class User extends Authenticatable
         'city',
         'country',
         'postal',
+        'role',
         'about'
     ];
 
