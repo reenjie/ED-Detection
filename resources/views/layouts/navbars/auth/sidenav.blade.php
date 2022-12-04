@@ -31,16 +31,8 @@
                 </div>
                 <h6 class="ms-2 text-uppercase  font-weight-bolder opacity-6 mb-0" style="font-size:10px">Manage</h6>
             </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'active' : '' }}" href="{{ route('profile') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li>
 
+            @if(Auth::user()->role==0)
             <li class="nav-item">
                 <a class="nav-link {{ str_contains(request()->url(), 'Species') == true ? 'active' : '' }}" href="{{ route('species') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -77,8 +69,36 @@
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
-          
+
+            @else 
             <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'Consultation') == true ? 'active' : '' }}" href="{{ route('consultation') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sms text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">My Consultation</span>
+                </a>
+            </li>
+
+
+            @endif
+            <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'active' : '' }}" href="{{ route('profile') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Profile</span>
+                </a>
+            </li>
+
+           
+            
+       
+
+          
+          
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ str_contains(request()->url(), 'tables') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'tables']) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -86,7 +106,7 @@
                     </div>
                     <span class="nav-link-text ms-1">Tables</span>
                 </a>
-            </li>
+            </li> --}}
 
        
         </ul>

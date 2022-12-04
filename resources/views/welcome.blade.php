@@ -72,9 +72,15 @@
                         @else 
                         <form action="{{route('search')}}">
                         <div class="" style="align-items:center;display: block;justify-content:center">
-                        <input class="form-control" required autofocus name="searchkey" value="@if(session()->has('searchkey')){{session()->get('searchkey')}}@endif" placeholder="Symptoms,Types of Animals,Disease etc.."/>
+                            <select required name="species" class="form-select mb-2" id="">
+                                <option value="">Select type of Species</option>
+                            @foreach ($data as $ss)
+                                <option value="{{$ss->id}}">{{$ss->Type}}</option>
+                            @endforeach
+                            </select>
+                        <input class="form-control" required autofocus name="searchkey" value="@if(session()->has('searchkey')){{session()->get('searchkey')}}@endif" placeholder="Search ... "/>
                        
-                     
+                        <h6  style="font-size:15px;cursor:pointer;text-decoration:underline" onClick="window.location.href='{{route('googlesearch')}}'" class="text-primary mt-2">Google Search</h6>
                         <button type="submit" class="btn btn-light btn-sm btn-gradient d-flex mt-1 "  style="float:right">Search <i style="margin-left:2px;padding-top:2px" class="fas fa-search"></i></button>
                     
                      </div>

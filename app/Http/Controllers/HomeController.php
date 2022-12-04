@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Species;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,8 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $data = Species::all();
     
-        return view('welcome');
+        return view('welcome',compact('data'));
         
     }
 

@@ -117,6 +117,22 @@ class DiseaseController extends Controller
         //
     }
 
+    public function updateText(Request $request){
+            $id = $request->id;
+            $table = $request->table;
+            $value = $request->value;
+
+            if($table == 'disease'){
+                Disease::findorFail($id)->update([
+                    'Name'=>$value,
+                ]);
+            }else {
+                Symptoms::findorFail($id)->update([
+                    'Content'=>$value,
+                ]);
+            }
+    }
+
     /**
      * Remove the specified resource from storage.
      *

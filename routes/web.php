@@ -28,6 +28,8 @@ use App\Http\Controllers\SpeciesController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\SymptomsController;
+use App\Http\Controllers\MessageController;
+
 
         
   
@@ -66,11 +68,31 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::post('Addsymptoms',[SymptomsController::class,'store'])->name('addsymptom');
 
 	Route::get('deletedisease',[DiseaseController::class,'destroy'])->name('deletedisease');
+
+	Route::get('upt',[DiseaseController::class,'updateText'])->name('updatetext');
 	
 
 
 	//Consultation
 	Route::get('Consultation',[ConsultationController::class,'index'])->name('consultation');
+	
+	Route::post('Consultation',[ConsultationController::class,'store'])->name('addconsultation');
+
+	Route::get('Select',[ConsultationController::class,'open'])->name('open');
+
+	Route::get('reselSelections',[ConsultationController::class,'reset'])->name('reselSelections');
+	
+	
+	Route::get('updateconsult',[ConsultationController::class,'update'])->name('updateconsult');
+	
+
+	//Messages
+	Route::get('xwq',[MessageController::class,'index'])->name('fetchmessage');
+
+	Route::get('send',[MessageController::class,'store'])->name('sendmessage');
+
+	Route::get('Deletemessage',[MessageController::class,'destroy'])->name('deletemessage');
+	
 	
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');

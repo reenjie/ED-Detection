@@ -33,14 +33,14 @@
                 @foreach (session()->get('species') as $row)
                 <div class="col-md-12 mb-5">
                    
-                        <div class="card border border-dark shadow-md bg-dark">
+                        <div class="card border  shadow-md bg-light">
 
                             <div class="card-header">
                                 <h5 style="font-weight:bold">{{$row->Type}}</h5>
                             </div>
                           
                             <div class="card-body">
-                                
+                               
                 @if(session()->has('alert'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong class="text-light" style=""><i class="fas fa-check-circle"></i> {{session()->get('alert')}}  </strong>
@@ -56,7 +56,7 @@
                 @endif
              
                                 @php
-                                $btn = '<i class="fas fa-plus-circle"> Add</i>';
+                                $btn = '<i class="fas fa-cog"> Manage</i>';
                             @endphp
                             @include('layouts.modal',[
                                 'type'=>'addDisease',
@@ -64,13 +64,18 @@
                                 'modalheader'=>'Adding Options','id'=>$row->id,
                                 'btn'=>$btn
                                 ])
+                                 <span class="  text-dark bg-light p-1" style="font-size:12px;border-radius:10px;float:right">
+                                <i class="fas fa-info-circle"></i>    To update contents. Tap and type.
+                                    <br>
+                                    Changes will be saved accordingly.
+                                   </span>
                                 <div class="table-responsive">
 
                               
                               
-                                <table class="table text-light table-bordered  table-sm" style="border-radius: 10px">
+                                <table class="table border-dark  table-bordered table-striped  table-sm" style="border-radius: 10px">
                                     <thead>
-                                      <tr>
+                                      <tr class="table-dark">
                                        
                                         <th scope="col">Disease</th>
                                         <th scope="col">Symptoms</th>
@@ -82,8 +87,9 @@
                                         @foreach (session()->get('disease') as $disease)
                                         <tr>
                                             <td scope="row" style="font-weight:bold;text-align:center;">
-                                                <br>{{$disease->Name}}
-                                            
+                                                <br>
+                                                
+                                            <input type="text" value="{{$disease->Name}}" style="width: 100%;outline:none;border:none;background-color:transparent;text-align:center;font-weight:bold;color:rgb(110, 45, 45)" class="update" data-table="disease" data-id="{{$disease->id}}" name="" id="">
                                          
                                             </td>
                                             <td>
@@ -94,14 +100,12 @@
                                                       
 
                                                   
-                                                       <textarea class="form-control mb-2 text-light" name="" style="background-color: transparent;width:100%;"  id=""  rows="3">{{$s->Content}}</textarea>
+                                                       <textarea class="form-control mb-2  update" name="" style="background-color: transparent;width:100%;"  id=""  rows="3"
+                                                    data-table="symptom" data-id="{{$s->id}}"
+                                                       >{{$s->Content}}</textarea>
                                                       
                                                      
-                                                       <span class="  text-light bg-warning p-1" style="font-size:12px;border-radius:10px">
-                                                        Type to Update Content
-                                                       </span>
-                                                       <br><br>
-                                                      
+                                                    
 
                                                         @php
                                                         $editbtn = 'View <i class="fas fa-image"></i>';
@@ -175,6 +179,21 @@ window.location.href="{{route('deletedisease')}}?id="+id;
 } 
 });
 }
+
+$('.update').keyup(function(){
+    var value = $(this).val();
+    var id =$(this).data('id');
+    var table = $(this).data('table');
+
+            $.ajax({
+            method: "GET",
+            url: "{{route('updatetext')}}",
+            data: { id: id, table: table,value:value }
+            })
+            .done(function( msg ) {
+               
+            });
+            })
 
         function reset(){
             window.location.href="{{route('resetSelection')}}";

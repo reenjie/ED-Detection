@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consultation;
+use App\Models\Disease;
+use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class ConsultationController extends Controller
 {
     /**
@@ -14,7 +18,38 @@ class ConsultationController extends Controller
      */
     public function index()
     {
-        return view('pages.Consultation.index');
+        $checkifexist = DB::select('select * from consultations where UserID = '.Auth::user()->id.'');
+        $disease = Disease::all();
+        $allconsultation = Consultation::all();
+        $alluserwConsultation = DB::select('select * from users where id in (select UserID from consultations)');
+       return view('pages.Consultation.index',compact('checkifexist','disease','allconsultation','alluserwConsultation'));
+    }
+    
+
+
+    public function open(Request $request){
+        $userid = $request->id;
+     
+        $selecteduser = User::where('id',$userid)->get();
+        $consultationData = Consultation::where('UserID',$userid)->get(); 
+        $variable = [
+            'userid'=>$userid,
+            'data'  =>$selecteduser,
+            'consultation'=>$consultationData,
+        ];
+        
+
+    
+         session(['userid'=>$variable]);
+
+        return redirect()->back();
+
+    }
+
+    public function reset(){
+        session()->remove('userid');
+        return redirect()->back();
+
     }
 
     /**
@@ -36,7 +71,21 @@ class ConsultationController extends Controller
     public function store(Request $request)
     {   
           
+        $diseaseID = $request->disease;
+        $details = $request->details;
 
+        if($diseaseID == 'Unknown'){
+            $diseaseID = 0;
+        }
+
+        Consultation::create([
+            'UserID'=>Auth::user()->id,
+            'Content'=>$details,
+            'DiseaseID'=>$diseaseID,
+            'Status'=>0,
+        ]);
+
+        return redirect()->back()->with('alert','Consultation Request Send Successfully!');
 
 
         
@@ -71,9 +120,14 @@ class ConsultationController extends Controller
      * @param  \App\Models\Consultation  $consultation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Consultation $consultation)
+    public function update(Request $request)
     {
-        //
+        $id = $request->id;
+        $val = $request->val;
+        Consultation::findorFail($id)->update([
+            'Content'=>$val,
+        ]);
+
     }
 
     /**
