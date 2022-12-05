@@ -53,6 +53,10 @@ class MessageController extends Controller
             $receiver = session()->get('userid')['userid'];
             Consultation::where('UserID',$receiver)->update([
                 'Status'=>1,
+            ]); 
+
+            Message::where('UserID',$receiver)->where('ConsultationID',$consultationID)->where('AdminID',$me)->update([
+                'status'=>1,
             ]);
 
 
@@ -62,6 +66,7 @@ class MessageController extends Controller
                 'UserID'=>$receiver,
                 'AdminID'=>$me,
                 'Sender'=>$me,
+                'status'=>1,
             ]);
 
         }else {
@@ -75,6 +80,7 @@ class MessageController extends Controller
                 'UserID'=> $me,
                 'AdminID'=>$receiver[0]['id'],
                 'Sender'=>$me,
+                'status'=>0,
             ]);
         }
         

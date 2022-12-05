@@ -3,81 +3,126 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
     <div class="container-fluid py-4">
-       
-        <!-- <div class="row mt-4">
-            <div class="col-lg-7 mb-lg-0 mb-4">
-                <div class="card z-index-2 h-100">
-                    <div class="card-header pb-0 pt-3 bg-transparent">
-                        <h6 class="text-capitalize">Sales overview</h6>
-                        <p class="text-sm mb-0">
-                            <i class="fa fa-arrow-up text-success"></i>
-                            <span class="font-weight-bold">4% more</span> in 2021
-                        </p>
+
+    <div class="row">
+        <div class="col-md-3 d-flex align-items-stretch">
+            <div class="card shadow mb-2 " style="border-left:10px solid #146d73;width:100%">
+                <div class="card-body ">
+                <div style="float:right" >
+                        <h6 style="font-size:40px"><i class="fas fa-users"></i></h6>
+
                     </div>
-                    <div class="card-body p-3">
-                        <div class="chart">
-                            <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
-                        </div>
-                    </div>
+                    
+                    <h5 class="mt-3" style="font-weight:bold">
+                    <span class="badge bg-success">5</span>
+                   
+                    Visitors</h5>
+                    
+                  
                 </div>
             </div>
-            <div class="col-lg-5">
-                <div class="card card-carousel overflow-hidden h-100 p-0">
-                    <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
-                        <div class="carousel-inner border-radius-lg h-100">
-                            <div class="carousel-item h-100 active" style="background-image: url('./img/carousel-1.jpg');
-            background-size: cover;">
-                                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                        <i class="ni ni-camera-compact text-dark opacity-10"></i>
-                                    </div>
-                                    <h5 class="text-white mb-1">Get started with Argon</h5>
-                                    <p>There’s nothing I really wanted to do in life that I wasn’t able to get good at.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item h-100" style="background-image: url('./img/carousel-2.jpg');
-            background-size: cover;">
-                                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                        <i class="ni ni-bulb-61 text-dark opacity-10"></i>
-                                    </div>
-                                    <h5 class="text-white mb-1">Faster way to create web pages</h5>
-                                    <p>That’s my skill. I’m not really specifically talented at anything except for the
-                                        ability to learn.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item h-100" style="background-image: url('./img/carousel-3.jpg');
-            background-size: cover;">
-                                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                        <i class="ni ni-trophy text-dark opacity-10"></i>
-                                    </div>
-                                    <h5 class="text-white mb-1">Share with us your design tips!</h5>
-                                    <p>Don’t be afraid to be wrong because you can’t learn anything from a compliment.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev w-5 me-3" type="button"
-                            data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next w-5 me-3" type="button"
-                            data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+        </div>
+
+        <div class="col-md-3 d-flex align-items-stretch">
+            <div class="card shadow mb-2 " style="border-left:10px solid #73141c;width:100%">
+                <div class="card-body ">
+                <div style="float:right" >
+                        <h6 style="font-size:40px"><i class="fas fa-list"></i></h6>
+
                     </div>
+                    
+                    <h5 class="mt-3" style="font-weight:bold">
+                    <span class="badge bg-success">5</span>
+                   
+                    Species</h5>
+                    
+                  
                 </div>
             </div>
-        </div> -->
+        </div>
+
+
+        <div class="col-md-3 d-flex align-items-stretch">
+            <div class="card shadow mb-2 " style="border-left:10px solid #227314;width:100%">
+                <div class="card-body ">
+                <div style="float:right" >
+                        <h6 style="font-size:40px"><i class="fas fa-user-circle"></i></h6>
+
+                    </div>
+                    
+                    <h5 class="mt-3" style="font-weight:bold">
+                    <span class="badge bg-success">5</span>
+                   
+                    Users</h5>
+                    
+                  
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-3 d-flex align-items-stretch">
+            <div class="card shadow mb-2 " style="border-left:10px solid #147355;width:100%">
+                <div class="card-body ">
+                <div style="float:right" >
+                        <h6 style="font-size:40px"><i class="fas fa-comment"></i></h6>
+
+                    </div>
+                    
+                    <h5 class="" style="font-weight:bold">
+                    <span class="badge bg-success">5</span>
+                   
+                    Consultations</h5>
+                    
+                  
+                </div>
+            </div>
+        </div>
+
+
+        
+    </div>
         <div class="row mt-4">
         <div class="card">
             <div class="card-body">
-                asdasd
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
             </div>
         </div>
         </div>
         @include('layouts.footers.auth.footer')
     </div>
+    <script>
+window.onload = function() {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	exportEnabled: true,
+	animationEnabled: true,
+	title: {
+		text: "Species and Its Diseases Data "
+	},
+	data: [{
+		type: "pie",
+		startAngle: 25,
+		toolTipContent: "<b>{label}</b>: {y}",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}",
+		dataPoints: [
+			{ y: 51.08, label: "Chrome" },
+			{ y: 27.34, label: "Internet Explorer" },
+			{ y: 10.62, label: "Firefox" },
+			{ y: 5.02, label: "Microsoft Edge" },
+			{ y: 4.07, label: "Safari" },
+			{ y: 1.22, label: "Opera" },
+			{ y: 0.44, label: "Others" }
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
 @endsection

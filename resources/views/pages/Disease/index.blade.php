@@ -64,11 +64,11 @@
                                 'modalheader'=>'Adding Options','id'=>$row->id,
                                 'btn'=>$btn
                                 ])
-                                 <span class="  text-dark bg-light p-1" style="font-size:12px;border-radius:10px;float:right">
+                                 <!-- <span class="  text-dark bg-light p-1" style="font-size:12px;border-radius:10px;float:right">
                                 <i class="fas fa-info-circle"></i>    To update contents. Tap and type.
                                     <br>
                                     Changes will be saved accordingly.
-                                   </span>
+                                   </span> -->
                                 <div class="table-responsive">
 
                               
@@ -105,14 +105,30 @@
                                                        >{{$s->Content}}</textarea>
                                                       
                                                      
-                                                    
-
-                                                        @php
-                                                        $editbtn = 'View <i class="fas fa-image"></i>';
+                                                    @php
+                                            $id = $s->id;
                                                     @endphp
-                                                    @include('layouts.modal',[
-                                                        'type'=>'viewSymptoms','class'=>'edit','modalheader'=>'','id'=>$s->id,
-                                                        'btn'=> $editbtn])
+                                                    
+                        <button type="button" class="btn btn-light text-success btn-sm" data-bs-toggle="modal" data-bs-target="#dd{{$s->id}}">
+                        View  <i class="fas fa-image"></i>
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="dd{{$s->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+                                </div>
+                            
+                            
+                                @include('pages.Disease.view')
+                            
+                        
+                            </div>
+                            </div>
+                        </div>
                                                   
                                                         @endif
                                                         

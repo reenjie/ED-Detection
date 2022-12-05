@@ -48,7 +48,8 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::get('/search', [HomeController::class, 'search'])->name('search')->middleware('guest');
 	Route::get('/googlesearch', [HomeController::class, 'googlesearch'])->name('googlesearch')->middleware('guest');
 	Route::get('/Back', [HomeController::class, 'Back'])->name('Back')->middleware('guest');
-
+	Route::get('/Result/View', [HomeController::class, 'ResultView'])->name('view')->middleware('guest');
+	
 
 	//species
 	Route::get('Species',[SpeciesController::class,'index'])->name('species');

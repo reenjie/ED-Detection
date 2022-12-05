@@ -18,6 +18,10 @@
     <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="assets/css/argon-dashboard.css" rel="stylesheet" />
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
 
         <style>
             body {
@@ -92,12 +96,18 @@
                         @if(session()->has('SearchData'))
                         @if(count(session()->get('SearchData'))>=1 )
                                   <div class="mt-2" id="customsc" style="height:300px;overflow-y:scroll">
-                        
-                           - <div style="text-align:left" class="mb-2">
-                            <a href="#" ><h6 class="text-info " style="font-weight:bold;text-decoration:underline;font-size:14px">Toxic Sdad</h6></a>
-                            <p style="font-size:13px">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt nisi, placeat ipsa dolorem ratione dolores ab dolor quo, totam odio alias hic similique repudiandae debitis, corporis esse beatae excepturi quod.</p>
-                            </div> 
+                          
+                        <!--diseaseID | diseaseName | diseaseTreatable | symptomsID | symptomsContent | speciesID | speciesType  -->
+                              @foreach(session()->get('SearchData') as $key => $row)
                            
+                              <div style="text-align:left" class="mb-2">
+                            <a href="{{route('view',['id'=>$row->diseaseID])}}" ><h6 class="text-info "  style="font-weight:bold;text-decoration:underline;font-size:14px">{{$row->diseaseName}}</h6></a>
+                            <p style="font-size:13px">{{$row->symptomsContent}}</p>
+                            </div> 
+          
+    
+                              @endforeach
+                        
 
                        
                         
@@ -116,7 +126,7 @@
 
                       </span></h6>
                            
-                           <h6 style="font-size:15px;cursor:pointer;text-decoration:underline" onClick="window.location.href='{{route('googlesearch')}}'" class="text-primary">Try in Google Search</h6>
+                          <!--  <h6 style="font-size:15px;cursor:pointer;text-decoration:underline" onClick="window.location.href='{{route('googlesearch')}}'" class="text-primary">Try in Google Search</h6> -->
                       </div>
                         @endif
                       

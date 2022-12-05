@@ -14,17 +14,32 @@
 
             @else 
             <div class="col-md-4">
-                <input type="text " class="form-control" placeholder="type to Search..">
-                <ul class="list-group list-group-flush">
+                <input type="text " class="form-control" placeholder="type to Search.." id="searchkey">
+                <ul class="list-group list-group-flush" id="items">
                 @foreach ($alluserwConsultation as $user)
                 <li class="list-group-item">
+                    <a href="#">
+                         @php
+                            $checknew = DB::select('select * from messages where UserID = '.$user->id.' and status =1 ');
+                        @endphp
+                        @if(count($checknew) == 0)
+                <span style="font-size:12px;text-transform:uppercase" class="text-success">New</span>
+                        @endif
                     <h6>{{$user->firstname.' '.$user->lastname}}
 
                         <br>
-                        <span style="font-size:11px;font-weight:normal">New Message <span class="badge badge-success bg-success">1</span></span>
+                        @php
+                            $countnewmessage = DB::select('select * from messages where UserID = '.$user->id.' and status =0 ');
+                        @endphp
+                      
+                        @if(count($countnewmessage)>=1)
+                        <span style="font-size:11px;font-weight:normal">New Message <span class="badge badge-success bg-success">{{count($countnewmessage)}}</span></span>
+                        @endif
                     </h6>
                    
-                    <button onclick="window.location.href='{{route('open').'?id='.$user->id}}'" style="float: right;" class="btn btn-link btn-sm">Open</button></li>
+                    <button onclick="window.location.href='{{route('open').'?id='.$user->id}}'" style="float: right;" class="btn btn-link btn-sm">Open</button>
+                </a>
+                </li>
 
               
                 @endforeach
@@ -137,6 +152,25 @@
     </div>
 
     <script>
+        $('#searchkey').keyup(function(){
+     
+   var input, filter, ul, li, a, i, txtValue;
+    input =  document.getElementById("searchkey");;
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("items");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+
+        })
+
         $('.updateissue').keyup(function(){
             var id = $(this).data('id');
             var val = $(this).val();

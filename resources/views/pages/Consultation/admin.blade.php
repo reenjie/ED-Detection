@@ -66,14 +66,18 @@
         </div>
 
 
-        @else 
+        @else
+        
+        <div class="container">
         <h6 style="text-align: center">
-            <img src="{{asset('assets/noselected.svg')}}" style="width:400px" alt="">
+            <img src="{{asset('assets/noselected.svg')}}" style="width:100%" alt="">
             <br>
             NO SELECTED.
             <br>
             <span style="font-size:13px">Please Select User to Start Conversation</span>
         </h6>
+        </div>
+      
             @endif
 
             <script>

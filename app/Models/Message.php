@@ -15,5 +15,6 @@ class Message extends Model
         'UserID',
         'AdminID',
         'Sender',
+        'status',
     ];
 }

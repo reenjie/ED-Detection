@@ -11,7 +11,8 @@
           <h5 class="modal-title" id="exampleModalLabel">{{$modalheader}}</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
         </div>
-       
+      
+        
          @if($type == 'addSpecies')
          @include('pages.Species.addspecies')
          @elseif($type == 'editSpecies')
@@ -20,7 +21,7 @@
          @include('pages.Disease.add')
          @elseif($type=='viewSymptoms')
          @include('pages.Disease.view')
-         @endif
+         @endif 
   
       </div>
     </div>

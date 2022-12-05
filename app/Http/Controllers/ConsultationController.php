@@ -32,6 +32,13 @@ class ConsultationController extends Controller
      
         $selecteduser = User::where('id',$userid)->get();
         $consultationData = Consultation::where('UserID',$userid)->get(); 
+       
+        $consid =  $consultationData[0]['id'];
+
+        Message::where('UserID',$userid)->where('ConsultationID',$consid)->where('AdminID',Auth::user()->id)->update([
+            'status'=>1,
+        ]);
+
         $variable = [
             'userid'=>$userid,
             'data'  =>$selecteduser,

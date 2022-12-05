@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('UserID');
             $table->integer('AdminID');
             $table->integer('Sender');
+            $table->integer('status');
             $table->timestamps();
         });
     }
