@@ -28,10 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        echo 'agoy';
-        // $data = Species::all();
+      
+        $data = Species::all();
     
-        // return view('welcome',compact('data'));
+        return view('welcome',compact('data'));
         
     }
 

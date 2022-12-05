@@ -64,11 +64,11 @@
                                 'modalheader'=>'Adding Options','id'=>$row->id,
                                 'btn'=>$btn
                                 ])
-                                 <!-- <span class="  text-dark bg-light p-1" style="font-size:12px;border-radius:10px;float:right">
+                                <span class="  text-dark bg-light p-1" style="font-size:12px;border-radius:10px;float:right">
                                 <i class="fas fa-info-circle"></i>    To update contents. Tap and type.
                                     <br>
                                     Changes will be saved accordingly.
-                                   </span> -->
+                                   </span> 
                                 <div class="table-responsive">
 
                               
