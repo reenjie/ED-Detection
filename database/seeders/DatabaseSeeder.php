@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'lastname' => 'Admin',
             'email' => 'admin@admin.com',
             'role' => 0,
+            'vrfy'=>1,
             'password' => bcrypt('password')
         ]);
     }

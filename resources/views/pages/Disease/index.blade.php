@@ -79,6 +79,7 @@
                                        
                                         <th scope="col">Disease</th>
                                         <th scope="col">Symptoms</th>
+                                        <th scope="col">Treatment</th>
                                        <th>Action</th>
                                       </tr>
                                     </thead>
@@ -136,6 +137,13 @@
                                                      
                                                
 
+                                            </td>
+                                            <td>
+                                                @foreach ($treatment as $t)
+                                                @if($t->DiseaseID == $disease->id )
+                                                   {{$t->Content}}  
+                                                   @endif
+                                                @endforeach
                                             </td>
                                             <td >
                                                 <button 

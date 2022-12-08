@@ -47,6 +47,8 @@
                                     @error('email') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>
                                 <input type="hidden" name="role" value="1">
+                                <input type="hidden" name="vrfy" value="0">
+                                
                                 <div class="flex flex-col mb-3">
                                     <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password">
                                     @error('password') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror

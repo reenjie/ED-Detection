@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('postal')->nullable();
             $table->integer('role'); // 0 : admin | 1 : user
+            $table->integer('vrfy');
             $table->text('about')->nullable();
             $table->rememberToken();
             $table->timestamps();

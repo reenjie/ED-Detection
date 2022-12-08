@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Disease;
 use App\Models\Species;
+use App\Models\Treatment;
 use App\Models\Symptoms;
 use App\Models\Images;
 
@@ -21,6 +22,7 @@ class DiseaseController extends Controller
         $data = Species::all();
         $disease = Disease::all();
         $symptoms = Symptoms::all();
+        $treatment = Treatment::all();
 
         if(session()->has('speciesID')){
         
@@ -30,7 +32,7 @@ class DiseaseController extends Controller
         }
         
        
-        return view('pages.Disease.index',compact('data','symptoms'));
+        return view('pages.Disease.index',compact('data','symptoms','treatment'));
     }
 
     public function sort(Request $request){
@@ -73,11 +75,18 @@ class DiseaseController extends Controller
        $name = $request->Name;
        $treatable = $request->Treatable;
        $speciesID = $request->id;
-       Disease::create([
+     $save =  Disease::create([
         'SpeciesID'=>$speciesID,
         'Name'=>$name,
         'Treatable'=>$treatable,
        ]);
+
+    
+      Treatment::create([
+        'DiseaseID'=>$save->id,
+        'Content'=>$request->treatment,
+      ]);
+      
 
        return redirect()->back()->with('alert','New Data Added Successfully!');
 

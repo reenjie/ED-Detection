@@ -15,7 +15,15 @@ class LoginController extends Controller
      * @return Renderable
      */
     public function show()
-    {
+    {   
+        $vcode = rand(100000,999999);
+        if(session()->has('vcode')){
+
+        }else {
+            session(['vcode'=>$vcode]);
+        }
+    
+
         return view('auth.login');
     }
 

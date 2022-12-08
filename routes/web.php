@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+
 });
 
 use App\Http\Controllers\HomeController;
@@ -29,13 +30,16 @@ use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\SymptomsController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\MailController;
 
 
         
   
 
 
-Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
+Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');	
+	
+	
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 	Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
 	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
@@ -93,6 +97,11 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::get('send',[MessageController::class,'store'])->name('sendmessage');
 
 	Route::get('Deletemessage',[MessageController::class,'destroy'])->name('deletemessage');
+
+	Route::get('testmail',[MailController::class,'sendcredentials'])->name('test');
+
+	Route::get('verifynow',[MailController::class,'verify'])->name('verifynow');
+	Route::post('checkverify',[MailController::class,'checkverify'])->name('checkverify');
 	
 	
 Route::group(['middleware' => 'auth'], function () {

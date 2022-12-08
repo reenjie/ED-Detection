@@ -22,6 +22,7 @@ class RegisterController extends Controller
             'password' => 'required|min:5|max:255',
             'terms' => 'required',
             'role'=>'required',
+            'vrfy'=>'required',
             
         ]);
         $user = User::create($attributes);

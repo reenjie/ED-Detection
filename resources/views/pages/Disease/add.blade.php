@@ -18,10 +18,23 @@
                 <label for="">Name</label>
                 <input name="Name" required type="text" class="form-control mb-2">
                 <label for="">is it Treatable?</label>
-                <select name="Treatable" class="form-select mb-2" id="">
+                <select name="Treatable" class="form-select mb-2" id="treatable">
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </select>
+
+                <textarea name="treatment" required id="treat" placeholder="Indicate Treatment here ..." class="form-control mb-2" id="" cols="30" rows="10"></textarea>
+
+                <script>
+                    $('#treatable').change(function(){
+                        var val = $(this).val();
+                        if(val == 1){
+                            $('#treat').removeClass('d-none');   
+                        }else {
+                            $('#treat').addClass('d-none');   
+                        }
+                    })
+                </script>
         
                 <button  type="submit" class="btn btn-success "><i class="fas fa-check-circle"></i> Save Disease</button>
             </form>

@@ -28,6 +28,7 @@ class User extends Authenticatable
         'country',
         'postal',
         'role',
+        'vrfy',
         'about'
     ];
 

@@ -58,9 +58,9 @@
                     @endforeach
                     @foreach($species as $sp)
                     <span style="font-size:15px;text-transform:uppercase">{{$sp->Type}}</span>
-                    @endforeach
-              
-                 
+                    @endforeach 
+                   
+
                      <h6 style="font-size:14px">Symptoms</h6>
                        
                         <span>
@@ -85,6 +85,11 @@
                             
                             @endforeach
                     </span>
+
+                    <h6 style="font-size:14px" class="mt-3">Treatment</h6>
+                    @foreach ($treatment as $tr)
+                        {{$tr->Content}}
+                    @endforeach
                       
                      
                     <br><br>

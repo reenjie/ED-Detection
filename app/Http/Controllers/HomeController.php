@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Species;
 use App\Models\Disease;
 use App\Models\Symptoms;
+use App\Models\Treatment;
 use App\Models\Images;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -87,8 +88,9 @@ class HomeController extends Controller
         $disease = Disease::where('id',$did)->get();
         $species = DB::select('select * from species where id in (select SpeciesID from diseases where id ='.$did.' )');
         $symptoms = Symptoms::where('DiseaseID',$did)->get();
+        $treatment = Treatment::where('DiseaseID',$did)->get();
         
-      return view('view',compact('disease','species','symptoms'));
+      return view('view',compact('disease','species','symptoms','treatment'));
 
 
     }
