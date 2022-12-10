@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use App\Models\User;
+use App\Models\Images;
 use App\Models\Consultation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -88,6 +89,70 @@ class MessageController extends Controller
 
     }
 
+    public function uploadimg(Request $request){
+        
+        $consultationID = $request->id;
+        //messagefile
+
+        if($request->file('messagefile')){
+
+
+            if(Auth::user()->role== 0){
+                //Admin 
+                $me = Auth::user()->id;
+                $receiver = session()->get('userid')['userid'];
+                Consultation::where('UserID',$receiver)->update([
+                    'Status'=>1,
+                ]); 
+    
+                Message::where('UserID',$receiver)->where('ConsultationID',$consultationID)->where('AdminID',$me)->update([
+                    'status'=>1,
+                ]);
+    
+    
+             $insert =   Message::create([
+                    'ConsultationID'=>$consultationID,
+                    'Message'=>'',
+                    'UserID'=>$receiver,
+                    'AdminID'=>$me,
+                    'Sender'=>$me,
+                    'status'=>1,
+                ]);
+    
+            }else {
+    
+                $me = Auth::user()->id;
+                //User
+                $receiver = User::where('role',0)->get();
+                $insert =  Message::create([
+                    'ConsultationID'=>$consultationID,
+                    'Message'=>'',
+                    'UserID'=> $me,
+                    'AdminID'=>$receiver[0]['id'],
+                    'Sender'=>$me,
+                    'status'=>0,
+                ]);
+            }
+            
+
+            foreach ($request->file('messagefile') as $key => $img) {
+               
+                $image = time().$key.'.'.$img->getClientOriginalExtension();
+
+                $img->move(public_path('attachments'), $image);
+                Images::create([
+                    'Photo'=>$image,
+                    'SymptomsID'=>0,
+                    'ConsultationID'=>0,
+                    'SpeciesID'=>0,
+                    'MessageID'=> $insert->id,
+                ]);
+            }
+
+        }
+        return redirect()->back();
+    }
+
     /**
      * Display the specified resource.
      *
@@ -133,4 +198,6 @@ class MessageController extends Controller
         $id = $request->id;
         Message::findorFail($id)->delete();
     }
+
+
 }

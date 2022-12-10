@@ -37,12 +37,30 @@
                         <span  class="text-danger text-sm">Disease </span>: <span class="badge badge-danger bg-danger text-light">Hepathishiiiii</span>
                     </div>
                     @endif
-                 
-                 
+                    
+                    
                     @endforeach
                
+                    <br>
+                    @php
+                            $images = DB::select('select * from images where ConsultationID ='.$consultationID.' ');
+                    @endphp
+                    @if(count($images)>=1)
+                    <h6 style="font-size:14px">File Attachments</h6>
+                   <div class="row">
+                        @foreach ($images as $img)
+                        <div class="col-md-2" style="cursor: pointer">
+                           <a href="{{asset('attachments').'/'.$img->Photo}}" target="_blank"> <img src="{{asset('attachments').'/'.$img->Photo}}" width="100%" height="100px" alt="">
+                           </a>
+                        </div> 
 
-                        
+              
+                        @endforeach
+                 
+                   </div>
+
+                   @endif
+                 
 
                 </div>
             </div>
@@ -61,6 +79,31 @@
          
             <div class="col-md-2">
                 <button id="send" style="float: left;margin-left: -20px;" class="btn btn-light text-success"><i class="fas fa-paper-plane"></i></button>
+               
+                <button id="fileattach" data-bs-toggle="modal" data-bs-target="#fileupload" style="" class="btn btn-light text-secondary"><i class="fas fa-paperclip"></i></button>
+  
+ 
+  <div class="modal fade" id="fileupload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Attach Image</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{{route('uploadimg')}}" method="POST" enctype="multipart/form-data" >
+            @csrf
+        <div class="modal-body">
+            <input type="file" name="messagefile[]" accept="image/*" multiple>
+            <input type="hidden" name="id" value="{{$consultationID}}">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="Submit" class="btn btn-primary">Upload</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
             </div>
       
         </div>
@@ -81,6 +124,7 @@
             @endif
 
             <script>
+              
                 $('#send').click(function(){
                     $(this).html('<div class="spinner-border text-primary spinner-border-sm" role="status"><span class="visually-hidden"></span></div>');
                     var message = $('#mymessage').val();

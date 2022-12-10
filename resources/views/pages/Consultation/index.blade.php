@@ -119,7 +119,7 @@
             <h5>You have no Consultation yet..</h5>
 
             <hr>
-            <form action="{{route('addconsultation')}}" method="post">
+            <form action="{{route('addconsultation')}}" method="post" enctype="multipart/form-data">
                 @csrf
            
             <h5>Create Consultation <i class="fas fa-share"></i></h5>
@@ -136,7 +136,13 @@
             Details :
             <textarea required name="details" class="form-control mb-2" placeholder="Please indicate Detailed information about the issue or problem of your pets." id="" cols="30" rows="10"></textarea>
 
-            <button type="submit" class="btn btn-success">Submit <i class="fas fa-paper-plane"></i></button>
+            <div class="container">
+                <button type="button" class="btn btn-link text-dark" id="attach">Attach Image <i class="fas fa-upload"></i></button>
+                <input type="file" accept="image/*" class="d-none" name="imagefile[]" id="imgfile" multiple>
+                <div id="imgcontent"></div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit <i class="fas fa-paper-plane"></i> </button> 
         </form>
             @endif
 
@@ -152,6 +158,27 @@
     </div>
 
     <script>
+        $('#imgfile').change(function(e){
+           var fp = $(this);
+           var lg =fp[0].files.length;
+           var items = fp[0].files;
+           var fragment = "";
+           if(lg>0){
+            for (var i = 0; i < lg; i++) {
+                var fileName = items[i].name; // get file name
+                var fileSize = items[i].size; // get file size
+                var fileType = items[i].type; // get file type
+             
+             fragment+= '<div class="mb-2 card p-4 shadow-lg">'+fileName+' <i class="fas fa-file" style="float:right"></i></div>';
+
+              
+            }
+           }
+           $('#imgcontent').html(fragment);
+        })
+        $('#attach').click(function(){
+            $('#imgfile').click();
+        })
         $('#searchkey').keyup(function(){
      
    var input, filter, ul, li, a, i, txtValue;

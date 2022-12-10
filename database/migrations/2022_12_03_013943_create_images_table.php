@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('SymptomsID');
             $table->integer('ConsultationID');
             $table->integer('SpeciesID');
+            $table->integer('MessageID');
             $table->timestamps();
         });
     }

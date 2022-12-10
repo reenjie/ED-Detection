@@ -58,6 +58,7 @@ class SymptomsController extends Controller
             'SymptomsID'=>$insert->id,
             'ConsultationID'=>0,
             'SpeciesID'=>0,
+            'MessageID'=>0
         ]);
     
             }

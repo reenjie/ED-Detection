@@ -6,6 +6,7 @@ use App\Models\Consultation;
 use App\Models\Disease;
 use App\Models\Message;
 use App\Models\User;
+use App\Models\Images;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -76,15 +77,43 @@ class ConsultationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-          
+    {       
         $diseaseID = $request->disease;
         $details = $request->details;
 
+        
         if($diseaseID == 'Unknown'){
             $diseaseID = 0;
         }
 
+        if($request->file('imagefile')){
+          $file = $request->file('imagefile');
+
+          $insert =  Consultation::create([
+            'UserID'=>Auth::user()->id,
+            'Content'=>$details,
+            'DiseaseID'=>$diseaseID,
+            'Status'=>0,
+        ]);
+
+
+
+          foreach($file as $key => $img){
+            $image = time().$key.'.'.$img->getClientOriginalExtension();
+
+            $img->move(public_path('attachments'), $image);
+    
+            Images::create([
+                'Photo'=>$image,
+                'SymptomsID'=>0,
+                'ConsultationID'=>$insert->id,
+                'SpeciesID'=>0,
+                'MessageID'=>0
+            ]);
+          }
+          
+        }else {
+        
         Consultation::create([
             'UserID'=>Auth::user()->id,
             'Content'=>$details,
@@ -92,7 +121,11 @@ class ConsultationController extends Controller
             'Status'=>0,
         ]);
 
-        return redirect()->back()->with('alert','Consultation Request Send Successfully!');
+            
+        }
+       
+   
+       return redirect()->back()->with('alert','Consultation Request Send Successfully!');
 
 
         

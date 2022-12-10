@@ -74,63 +74,26 @@
                         </script>
                         <div class="gcse-search"></div>
                         @else 
-                        <form action="{{route('search')}}">
+                     
                         <div class="" style="align-items:center;display: block;justify-content:center">
-                            <select required name="species" class="form-select mb-2" id="">
+                            <select  name="species" class="form-select mb-2" id="species">
                                 <option value="">Select type of Species</option>
                             @foreach ($data as $ss)
                                 <option value="{{$ss->id}}">{{$ss->Type}}</option>
                             @endforeach
                             </select>
-                        <input class="form-control" required autofocus name="searchkey" value="@if(session()->has('searchkey')){{session()->get('searchkey')}}@endif" placeholder="Search ... "/>
+                        <input id="searchkey" class="form-control" required autofocus name="searchkey" value="@if(session()->has('searchkey')){{session()->get('searchkey')}}@endif" placeholder="Search ... "/>
                        
                         <h6  style="font-size:15px;cursor:pointer;text-decoration:underline" onClick="window.location.href='{{route('googlesearch')}}'" class="text-primary mt-2">Google Search</h6>
-                        <button type="submit" class="btn btn-light btn-sm btn-gradient d-flex mt-1 "  style="float:right">Search <i style="margin-left:2px;padding-top:2px" class="fas fa-search"></i></button>
+                        {{-- <button type="submit" class="btn btn-light btn-sm btn-gradient d-flex mt-1 "  style="float:right">Search <i style="margin-left:2px;padding-top:2px" class="fas fa-search"></i></button> --}}
                     
                      </div>
-                        </form>
+                       
                 
                     
                         <br><br>
-
-                        @if(session()->has('SearchData'))
-                        @if(count(session()->get('SearchData'))>=1 )
-                                  <div class="mt-2" id="customsc" style="height:300px;overflow-y:scroll">
-                          
-                        <!--diseaseID | diseaseName | diseaseTreatable | symptomsID | symptomsContent | speciesID | speciesType  -->
-                              @foreach(session()->get('SearchData') as $key => $row)
-                           
-                              <div style="text-align:left" class="mb-2">
-                            <a href="{{route('view',['id'=>$row->diseaseID])}}" ><h6 class="text-info "  style="font-weight:bold;text-decoration:underline;font-size:14px">{{$row->diseaseName}}</h6></a>
-                            <p style="font-size:13px">{{$row->symptomsContent}}</p>
-                            </div> 
-          
-    
-                              @endforeach
-                        
-
-                       
-                        
-
-                    
-
-                   
-                
-                </div>  
-                        @else 
-                      <div mt-5>
-                      <h6> No Results Found . Searchkey : <span class="text-danger">
-                        @if(session()->has('searchkey'))
-                        {{session()->get('searchkey')}}
-                        @endif
-
-                      </span></h6>
-                           
-                          <!--  <h6 style="font-size:15px;cursor:pointer;text-decoration:underline" onClick="window.location.href='{{route('googlesearch')}}'" class="text-primary">Try in Google Search</h6> -->
-                      </div>
-                        @endif
-                      
-                        @endif
+                     <div id="searchresult"></div>
+                  
 
                         @endif
                        
@@ -143,6 +106,78 @@
                 <div class="col-md-1"></div>
             </div>
             </div>
+            <script>
+                $(document).ready(function(){
+                    $('#searchkey').keyup(function(){
+                        var species = $('#species').val();
+                        var key = $(this).val();
+                        if(key == ''){
+                            $('#searchresult').html('');
+                        }else {
+
+                            if(species == ''){
+                            //search for any match keys
+                            
+                        $.ajax({
+                        method: "GET",
+                        url: "{{route('search')}}",
+                        data: { species:0,searchkey:key }
+                        })
+                        .done(function( msg ) {
+                          $('#searchresult').html(msg);
+                        });
+                        }else {
+                            //search for match id and keys
+
+                        $.ajax({
+                        method: "GET",
+                        url: "{{route('search')}}",
+                        data: { species:species,searchkey:key }
+                        })
+                        .done(function( msg ) {
+                            $('#searchresult').html(msg);
+                        });
+                        }   
+
+                        }
+
+                       
+                     
+
+                    })
+
+                    $('#species').change(function(){
+                        var species = $(this).val();
+                        var key = $('#searchkey').val();
+
+                        if(species == ''){
+                            //search for any match keys
+                            
+                        $.ajax({
+                        method: "GET",
+                        url: "{{route('search')}}",
+                        data: { species:0,searchkey:key }
+                        })
+                        .done(function( msg ) {
+                          $('#searchresult').html(msg);
+                        });
+                        }else {
+                            //search for match id and keys
+
+                        $.ajax({
+                        method: "GET",
+                        url: "{{route('search')}}",
+                        data: { species:species,searchkey:key }
+                        })
+                        .done(function( msg ) {
+                            $('#searchresult').html(msg);
+                        });
+                        }   
+                    })
+
+
+                })
+            </script>
             <style>
                 /* width */
                 

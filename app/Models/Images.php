@@ -14,5 +14,6 @@ class Images extends Model
         'SymptomsID',
         'ConsultationID',
         'SpeciesID',
+        'MessageID',
     ];
 }

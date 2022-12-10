@@ -39,11 +39,23 @@ class HomeController extends Controller
 
     public function search(Request $request){
         $search = $request->searchkey;
-
-       //$data = ['asd','www'];
        $id = $request->species;
        $searchkey = $request->searchkey;
 
+       if($id == 0){
+        $data = DB::select('select 
+        diseases.id as diseaseID,diseases.Name as diseaseName,diseases.Treatable as diseaseTreatable,
+        symptoms.id as symptomsID,symptoms.Content as symptomsContent,
+        species.id as speciesID,species.Type as speciesType
+        from 
+        diseases 
+        LEFT join symptoms on symptoms.DiseaseID = diseases.id 
+        LEFT join species on species.id = diseases.SpeciesID 
+        where symptoms.Content like "%'.$searchkey.'%" or diseases.Name like "%'.$searchkey.'%" ');
+
+       }else {
+        
+        
        $data = DB::select('select 
        diseases.id as diseaseID,diseases.Name as diseaseName,diseases.Treatable as diseaseTreatable,
        symptoms.id as symptomsID,symptoms.Content as symptomsContent,
@@ -52,27 +64,26 @@ class HomeController extends Controller
        diseases 
        LEFT join symptoms on symptoms.DiseaseID = diseases.id 
        LEFT join species on species.id = diseases.SpeciesID 
-       where species.id = '.$id.' and symptoms.Content like "%'.$searchkey.'%" or diseases.Name like "%'.$searchkey.'%" ');
+       where  symptoms.Content like "%'.$searchkey.'%" or diseases.Name like "%'.$searchkey.'%" and species.id = '.$id.' ');
 
-       // diseaseID | diseaseName | diseaseTreatable | symptomsID | symptomsContent | speciesID | speciesType
-       if(count($data)>=1){
-        //Search found something
 
-        session(['SearchData'=>$data]);
-        return redirect()->route('home')->with('searchkey',$search);
-       }else {
-        //Nothing Found.
-
-        session(['SearchData'=>[]]);
-        return redirect()->route('home')->with('searchkey',$search);
        }
-
        
-        // 
-       
+       return view('results',compact('data'));
 
+    //    // diseaseID | diseaseName | diseaseTreatable | symptomsID | symptomsContent | speciesID | speciesType
+    //    if(count($data)>=1){
+    //     //Search found something
 
-        // 
+    //     session(['SearchData'=>$data]);
+    //     return redirect()->route('home')->with('searchkey',$search);
+    //    }else {
+    //     //Nothing Found.
+
+    //     session(['SearchData'=>[]]);
+    //     return redirect()->route('home')->with('searchkey',$search);
+    //    }
+
 
         
 

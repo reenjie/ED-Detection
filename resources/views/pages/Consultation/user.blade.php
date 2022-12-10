@@ -17,6 +17,32 @@
  
     <div class="col-md-2">
         <button id="send" style="float: left;margin-left: -20px;" class="btn btn-light text-success"><i class="fas fa-paper-plane"></i></button>
+
+              
+        <button id="fileattach" data-bs-toggle="modal" data-bs-target="#fileupload" style="" class="btn btn-light text-secondary"><i class="fas fa-paperclip"></i></button>
+  
+ 
+        <div class="modal fade" id="fileupload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Attach Image</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form action="{{route('uploadimg')}}" method="POST" enctype="multipart/form-data" >
+                  @csrf
+              <div class="modal-body">
+                  <input type="file" name="messagefile[]" accept="image/*" multiple>
+                  <input type="hidden" name="id" value="{{$consultationID}}">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="Submit" class="btn btn-primary">Upload</button>
+              </div>
+          </form>
+            </div>
+          </div>
+        </div>
     </div>
 </div>
 

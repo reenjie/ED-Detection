@@ -98,6 +98,8 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 
 	Route::get('Deletemessage',[MessageController::class,'destroy'])->name('deletemessage');
 
+	Route::post('uploadimg',[MessageController::class,'uploadimg'])->name('uploadimg');
+
 	Route::get('testmail',[MailController::class,'sendcredentials'])->name('test');
 
 	Route::get('verifynow',[MailController::class,'verify'])->name('verifynow');

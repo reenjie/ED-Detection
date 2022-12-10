@@ -19,6 +19,23 @@
                   <span style="font-size:13px">
                       {{$item->Message}}
                   </span>
+
+                  <br>
+                  @php
+                      $images = DB::select('select * from images where MessageID='.$item->id.' ');
+                  @endphp
+
+                  @if(count($images)>=1)
+                  <div class="row">
+
+                 
+                  @foreach ($images as $img)
+               <div class="col-md-6" > <a href="{{asset('attachments').'/'.$img->Photo}}" target="_blank"> <img src="{{asset('attachments').'/'.$img->Photo}}" style="width: 100%;" alt=""></a> </div>
+              
+                  @endforeach
+                </div>
+
+                  @endif
   
                 
               </div>
@@ -30,7 +47,26 @@
      
         <div class="card shadow">
             <div class="card-body mb-2">
-                <h6 style="font-size:14px">From another User
+                <h6 style="font-size:14px">
+                    @if(Auth::user()->role == 0)
+                    @if(Auth::user()->id != $item->Sender)
+                        @php
+                            $user = DB::select('select * from users where id='.$item->UserID.' ')
+                        @endphp
+
+                           @foreach ($user as $u)
+                               {{$u->firstname.' '.$u->lastname}}
+                           @endforeach
+                    @endif
+                    @else 
+                  
+                    @if(Auth::user()->id != $item->Sender)
+                        Administrator
+                    @endif
+                    @endif
+                
+
+
                 <br>
                 <span style="font-size:11px;font-weight:normal">{{date('h:i a Fj,Y',strtotime($item->created_at))}}</span>
                 </h6>
@@ -38,8 +74,24 @@
                 <span style="font-size:13px">
                   {{$item->Message}}
                 </span>
+                <br>
+                @php
+                      $images = DB::select('select * from images where MessageID='.$item->id.' ');
+                  @endphp
 
+                  @if(count($images)>=1)
+                  <div class="row">
+                    @foreach ($images as $img)
+                 
+                    <div class="col-md-6" > <a href="{{asset('attachments').'/'.$img->Photo}}" target="_blank"> <img src="{{asset('attachments').'/'.$img->Photo}}" style="width: 100%;" alt=""></a> </div>
+                   
+                    @endforeach
+                  
+                  </div>
               
+                 
+
+                  @endif
             </div>
         </div>
     </div>
