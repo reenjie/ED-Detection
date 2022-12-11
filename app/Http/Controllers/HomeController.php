@@ -117,4 +117,15 @@ class HomeController extends Controller
         session()->flush();
         return redirect()->route('home');
     }
+
+    public function confirmreset(Request $request){
+        $email = $request->email;
+        $newpass = $request->newpassword;
+
+        session(['newpassword'=>$newpass]);
+        session(['resetemail'=>$email]);
+
+        return redirect()->route('sendResetCode',['email'=>$email]);
+
+    }
 }

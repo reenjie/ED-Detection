@@ -53,6 +53,8 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::get('/googlesearch', [HomeController::class, 'googlesearch'])->name('googlesearch')->middleware('guest');
 	Route::get('/Back', [HomeController::class, 'Back'])->name('Back')->middleware('guest');
 	Route::get('/Result/View', [HomeController::class, 'ResultView'])->name('view')->middleware('guest');
+
+	Route::post('Confirm-password',[HomeController::class, 'confirmreset'])->name('resetpassword')->middleware('guest');;
 	
 
 	//species
@@ -104,6 +106,10 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 
 	Route::get('verifynow',[MailController::class,'verify'])->name('verifynow');
 	Route::post('checkverify',[MailController::class,'checkverify'])->name('checkverify');
+
+	Route::get('sendResetCode',[MailController::class,'sendResetCode'])->name('sendResetCode');
+
+	Route::post('confirmresetcode',[MailController::class,'confirmresetcode'])->name('confirmresetcode');
 	
 	
 Route::group(['middleware' => 'auth'], function () {

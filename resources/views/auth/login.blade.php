@@ -24,7 +24,14 @@
                                     <h4 class="font-weight-bolder">Sign In</h4>
                                     <p class="mb-0"></p>
                                 </div>
+
                                 <div class="card-body">
+                                  
+                                    @if(session()->has('Success'))
+                                    <div class="alert alert-success text-light">
+                                        {{session()->get('Success')}}
+                                    </div>
+                                    @endif
                                     <form role="form" method="POST" action="{{ route('login.perform') }}">
                                         @csrf
                                         @method('post')
